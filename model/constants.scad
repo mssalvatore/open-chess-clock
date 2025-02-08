@@ -17,7 +17,7 @@ body_edge_radius = 6;
 
 lid_x = body_x - (2 * lid_lip);
 lid_y =  body_y_top - (2 * lid_lip);
-lid_z = 4; 
+lid_z = 8.5;
 lid_tolerance = .2;
 
 socket_edge_offset = 10;
