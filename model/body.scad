@@ -60,15 +60,15 @@ module phone_socket_cutout() {
 }
 
 module backplate() {
-    top_backplate_center_z = (body_z - body_wall_thickness) / 2;
-    top_backplate_center_y = (body_hollow_y_bottom / 2) - (top_backplate_center_z / tan(body_theta));
+    backplate_center_z = (body_z - body_wall_thickness) / 2;
+    backplate_center_y = (body_hollow_y_bottom / 2) - (backplate_center_z / tan(body_theta));
 
-    move([0, -top_backplate_center_y * 1.02, top_backplate_center_z * 1.02]) {
+    move([0, -backplate_center_y * 1.02, backplate_center_z * 1.02]) {
         xrot(body_theta) {
-            ymove(phone_y / 2 + body_wall_thickness) {
+            yspread(phone_y - backplate_y, n=2) {
                 cuboid(
                 [phone_x + body_wall_thickness, backplate_y + body_wall_thickness, backplate_thickness],
-                align=V_BOTTOM + V_FRONT
+                align=V_BOTTOM
                 );
             }
         }
