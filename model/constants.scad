@@ -11,7 +11,9 @@ body_front_thickness = phone_z + 1;
 
 lid_lip = body_wall_thickness / 2;
 
-body_x = 200;
+body_theta = 68;
+body_edge_radius = 4;
+body_x = phone_x + 2 * ((body_wall_thickness + lid_lip) / sin(body_theta)) + (body_edge_radius / 2);
 body_y = 90 + (2 * body_wall_thickness);
 body_z = phone_y + (2 * body_wall_thickness) + lid_lip;
 body_theta = 68;
@@ -19,7 +21,6 @@ body_hollow_y = body_y - (body_wall_thickness + body_front_thickness);
 body_hollow_y_bottom = calculate_y_offset(body_hollow_y, body_wall_thickness, body_theta);
 body_hollow_y_top = calculate_y_offset(body_hollow_y, body_z, body_theta);
 body_y_top = calculate_y_offset(body_y, body_z, body_theta);
-body_edge_radius = 6;
 
 lid_x = body_x - (2 * lid_lip);
 lid_y =  body_y_top - (2 * lid_lip);
