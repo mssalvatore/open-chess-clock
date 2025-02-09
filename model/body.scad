@@ -40,11 +40,11 @@ module lid_recess() {
 module pcb_mount() {
     difference() {
         cuboid([pcb_mount_x, pcb_mount_y, pcb_mount_z], align=V_TOP + V_BACK);
-        move([0, -.001, pcb_z_clearance]) #cuboid([pcb_x, pcb_insert_depth, pcb_thickness], align=V_TOP + V_BACK);
+        move([0, -.001, pcb_z_clearance]) cuboid([pcb_x, pcb_insert_depth, micro_pcb_thickness], align=V_TOP + V_BACK);
     }
     move([pcb_mount_hole_x, -pcb_mount_hole_y, 0]) {
         cyl(d=pcb_mount_hole_diameter * 1.5, h=pcb_z_clearance, align=V_TOP);
-        zmove(pcb_z_clearance) cyl(d=pcb_mount_hole_diameter, h=pcb_thickness * 1.5, align=V_TOP);
+        zmove(pcb_z_clearance) cyl(d=pcb_mount_hole_diameter, h=micro_pcb_thickness * 1.5, align=V_TOP);
     }
 }
 
