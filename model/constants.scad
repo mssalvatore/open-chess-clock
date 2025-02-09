@@ -2,15 +2,18 @@ include <hotswap_pcb_generator/scad/parameters.scad>
 
 function calculate_y_offset(base, z_offset, theta) = ((tan(theta) * base) - z_offset) / tan(theta);
 
+phone_x = 170;
+phone_y = 85;
+phone_z = 10;
 
 body_wall_thickness = 8;
-body_front_thickness = 12;
+body_front_thickness = phone_z + 1;
 
 lid_lip = body_wall_thickness / 2;
 
 body_x = 200;
 body_y = 90 + (2 * body_wall_thickness);
-body_z = 90 + lid_lip;
+body_z = phone_y + (2 * body_wall_thickness) + lid_lip;
 body_theta = 68;
 body_hollow_y = body_y - (body_wall_thickness + body_front_thickness);
 body_hollow_y_bottom = calculate_y_offset(body_hollow_y, body_wall_thickness, body_theta);

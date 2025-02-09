@@ -48,6 +48,17 @@ module pcb_mount() {
     }
 }
 
+module phone_socket_cutout() {
+    center_z = body_z / 2;
+    center_y = (body_y / 2) - (center_z / tan(body_theta));
+    *xrot(body_theta) cuboid([phone_x, phone_y, body_front_thickness + .002], align=V_BOTTOM);
+    move([0, -center_y - .001, center_z + .001]) {
+        xrot(body_theta) {
+            cuboid([phone_x - .001, phone_y - .001, body_front_thickness + .002], align=V_BOTTOM);
+        }
+    }
+}
+
 module body() {
     body_hollow_y_adjustment = (body_front_thickness - body_wall_thickness);
 
@@ -61,6 +72,7 @@ module body() {
         );
         move([0, body_hollow_y_adjustment, body_wall_thickness]) body_hollow();
         move([0, (body_y - body_y_top - (body_hollow_y_adjustment / 2)) / 2, body_z]) lid_recess();
+        phone_socket_cutout();
     }
 
     ymove(-pcb_mount_y + (body_hollow_y_bottom / 2) + body_hollow_y_adjustment + .001) {
