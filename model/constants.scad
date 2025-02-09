@@ -21,7 +21,7 @@ lid_z = 8.5;
 lid_tolerance = .2;
 
 socket_edge_offset = 10;
-socket_hole_dimension = socket_size + (h_border_width * 2);
+socket_dimension = socket_size + (h_border_width * 2);
+socket_hole_dimension = socket_size;
 switch_spacing = lid_x - socket_hole_dimension - ((lid_lip + socket_edge_offset) * 2);
 switch_z_offset = pcb_thickness / 2;
-
