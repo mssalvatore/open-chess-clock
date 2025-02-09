@@ -91,7 +91,7 @@ module backplate() {
                 cuboid(
                 [
                     phone_x + body_wall_thickness,
-                    backplate_width + body_wall_thickness,
+                    backplate_width + (body_wall_thickness / 2),
                     backplate_thickness
                 ],
                 align=V_BOTTOM
@@ -102,7 +102,7 @@ module backplate() {
                 cuboid(
                 [
                     backplate_width + body_wall_thickness,
-                    phone_y + body_wall_thickness,
+                    phone_y + (body_wall_thickness / 2),
                     backplate_thickness
                 ],
                 align=V_BOTTOM
@@ -126,13 +126,13 @@ module body() {
                     r=body_edge_radius
                 );
                 move([0, body_hollow_y_adjustment, body_wall_thickness]) body_hollow();
-                move([0, (body_y - body_y_top - (body_hollow_y_adjustment / 2)) / 2, body_z]) {
-                    lid_recess();
-                }
             }
             backplate();
         }
         phone_socket_cutout();
+        move([0, (body_y - body_y_top - (body_hollow_y_adjustment / 2)) / 2, body_z]) {
+            lid_recess();
+        }
     }
 
     ymove(-pcb_mount_y + (body_hollow_y_bottom / 2) + body_hollow_y_adjustment + .001) {
