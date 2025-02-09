@@ -65,9 +65,24 @@ module backplate() {
 
     move([0, -backplate_center_y * 1.02, backplate_center_z * 1.02]) {
         xrot(body_theta) {
-            yspread(phone_y - backplate_y, n=2) {
+            yspread(phone_y - backplate_width, n=2) {
                 cuboid(
-                [phone_x + body_wall_thickness, backplate_y + body_wall_thickness, backplate_thickness],
+                [
+                    phone_x + body_wall_thickness,
+                    backplate_width + body_wall_thickness,
+                    backplate_thickness
+                ],
+                align=V_BOTTOM
+                );
+            }
+
+            xspread(phone_x - backplate_width, n=2) {
+                cuboid(
+                [
+                    backplate_width + body_wall_thickness,
+                    phone_y + body_wall_thickness,
+                    backplate_thickness
+                ],
                 align=V_BOTTOM
                 );
             }

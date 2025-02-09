@@ -47,4 +47,4 @@ pcb_mount_hole_y = 33;
 pcb_mount_hole_diameter=3;
 
 backplate_thickness = 3;
-backplate_y = 15;
+backplate_width = 15;
