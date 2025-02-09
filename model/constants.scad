@@ -14,7 +14,7 @@ body_z = 90 + lid_lip;
 body_theta = 68;
 body_hollow_y = body_y - (body_wall_thickness + body_front_thickness);
 body_hollow_y_bottom = calculate_y_offset(body_hollow_y, body_wall_thickness, body_theta);
-body_hollow_y_top = calculate_y_offset(body_hollow_y, body_z - body_wall_thickness, body_theta);
+body_hollow_y_top = calculate_y_offset(body_hollow_y, body_z, body_theta);
 body_y_top = calculate_y_offset(body_y, body_z, body_theta);
 body_edge_radius = 6;
 
