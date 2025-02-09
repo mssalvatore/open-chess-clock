@@ -12,17 +12,19 @@ $fn=64;
 module body_hollow() {
     thickness_offset_x = 2 * body_wall_thickness;
     thickness_offset_y = body_wall_thickness + body_front_thickness;
+    body_hollow_y_bottom = calculate_y_offset(body_hollow_y, body_wall_thickness, body_theta);
+    body_hollow_y_top = calculate_y_offset(body_hollow_y, body_z - body_wall_thickness, body_theta);
     rounded_prismoid(
         size1=[
             body_x - thickness_offset_x,
-            calculate_y_offset(body_y - thickness_offset_y, body_wall_thickness, body_theta)
+            body_hollow_y_bottom
         ],
         size2=[
             body_x - thickness_offset_x,
-            calculate_y_offset(body_y - thickness_offset_y, body_z - body_wall_thickness, body_theta)
+            body_hollow_y_top
         ],
         h=body_z - body_wall_thickness + .001,
-        shift=[0, (body_y - body_y_top) / 2],
+        shift=[0, (body_hollow_y_bottom - body_hollow_y_top) / 2],
         r=body_edge_radius
     );
 
@@ -38,6 +40,7 @@ module lid_recess() {
     );
 }
 module body() {
+    body_hollow_y_adjustment = (body_front_thickness - body_wall_thickness);
     difference() {
         rounded_prismoid(
             size1=[body_x, body_y],
@@ -46,8 +49,8 @@ module body() {
             shift=[0,(body_y - body_y_top) / 2],
             r=body_edge_radius
         );
-        move([0, (body_front_thickness - body_wall_thickness) / 2, body_wall_thickness]) body_hollow();
-        move([0, (body_y - body_y_top) / 2, body_z]) lid_recess();
+        move([0, body_hollow_y_adjustment, body_wall_thickness]) body_hollow();
+        move([0, (body_y - body_y_top - (body_hollow_y_adjustment / 2)) / 2, body_z]) lid_recess();
     }
 }
 
