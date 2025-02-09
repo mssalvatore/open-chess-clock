@@ -48,6 +48,25 @@ module pcb_mount() {
     }
 }
 
+module usb_cable_relief() {
+    xmove(usb_cable_protrusion - .001) {
+        cuboid(
+            [
+                backplate_width + body_wall_thickness,
+                usb_cable_width,
+                body_front_thickness + backplate_thickness + usb_cable_protrusion + .001
+            ],
+            align=V_BOTTOM + V_LEFT
+        );
+    }
+    move([-.002, 0,0]) {
+        cuboid(
+            [usb_cable_protrusion, usb_plug_width, body_front_thickness],
+            align=V_BOTTOM + V_RIGHT
+        );
+    }
+}
+
 module phone_socket_cutout() {
     phone_socket_center_z = body_z / 2;
     phone_socket_center_y = (body_y / 2) - (phone_socket_center_z / tan(body_theta));
@@ -55,6 +74,9 @@ module phone_socket_cutout() {
     move([0, -phone_socket_center_y - .001, phone_socket_center_z + .001]) {
         xrot(body_theta) {
             cuboid([phone_x - .002, phone_y - .002, body_front_thickness + .002], align=V_BOTTOM);
+            xmove(phone_x / 2) {
+                usb_cable_relief();
+            }
         }
     }
 }
@@ -63,7 +85,7 @@ module backplate() {
     backplate_center_z = (body_z - body_wall_thickness) / 2;
     backplate_center_y = (body_hollow_y_bottom / 2) - (backplate_center_z / tan(body_theta));
 
-    move([0, -backplate_center_y * 1.02, backplate_center_z * 1.02]) {
+    move([0, -backplate_center_y * 1.01, backplate_center_z * 1.01]) {
         xrot(body_theta) {
             yspread(phone_y - backplate_width, n=2) {
                 cuboid(
@@ -94,18 +116,24 @@ module body() {
     body_hollow_y_adjustment = (body_front_thickness - body_wall_thickness);
 
     difference() {
-        rounded_prismoid(
-            size1=[body_x, body_y],
-            size2=[body_x,body_y_top],
-            h=body_z,
-            shift=[0,(body_y - body_y_top) / 2],
-            r=body_edge_radius
-        );
-        move([0, body_hollow_y_adjustment, body_wall_thickness]) body_hollow();
-        move([0, (body_y - body_y_top - (body_hollow_y_adjustment / 2)) / 2, body_z]) lid_recess();
+        union() {
+            difference() {
+                rounded_prismoid(
+                    size1=[body_x, body_y],
+                    size2=[body_x,body_y_top],
+                    h=body_z,
+                    shift=[0,(body_y - body_y_top) / 2],
+                    r=body_edge_radius
+                );
+                move([0, body_hollow_y_adjustment, body_wall_thickness]) body_hollow();
+                move([0, (body_y - body_y_top - (body_hollow_y_adjustment / 2)) / 2, body_z]) {
+                    lid_recess();
+                }
+            }
+            backplate();
+        }
         phone_socket_cutout();
     }
-    backplate();
 
     ymove(-pcb_mount_y + (body_hollow_y_bottom / 2) + body_hollow_y_adjustment + .001) {
         zmove(body_wall_thickness - .001) {

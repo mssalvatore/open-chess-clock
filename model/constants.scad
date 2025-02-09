@@ -48,3 +48,7 @@ pcb_mount_hole_diameter=3;
 
 backplate_thickness = 3;
 backplate_width = 15;
+
+usb_cable_width= 8;
+usb_plug_width= 14;
+usb_cable_protrusion = 1;
