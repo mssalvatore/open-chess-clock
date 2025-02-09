@@ -2,7 +2,7 @@ include <hotswap_pcb_generator/scad/parameters.scad>
 
 function calculate_y_offset(base, z_offset, theta) = ((tan(theta) * base) - z_offset) / tan(theta);
 
-phone_x = 170;
+phone_x = 168; // Any bigger and my printer can't handle it.
 phone_y = 85;
 phone_z = 10;
 
