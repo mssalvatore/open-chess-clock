@@ -49,11 +49,28 @@ module pcb_mount() {
 }
 
 module phone_socket_cutout() {
-    center_z = body_z / 2;
-    center_y = (body_y / 2) - (center_z / tan(body_theta));
-    move([0, -center_y - .001, center_z + .001]) {
+    phone_socket_center_z = body_z / 2;
+    phone_socket_center_y = (body_y / 2) - (phone_socket_center_z / tan(body_theta));
+
+    move([0, -phone_socket_center_y - .001, phone_socket_center_z + .001]) {
         xrot(body_theta) {
-            cuboid([phone_x - .001, phone_y - .001, body_front_thickness + .002], align=V_BOTTOM);
+            cuboid([phone_x - .002, phone_y - .002, body_front_thickness + .002], align=V_BOTTOM);
+        }
+    }
+}
+
+module backplate() {
+    top_backplate_center_z = (body_z - body_wall_thickness) / 2;
+    top_backplate_center_y = (body_hollow_y_bottom / 2) - (top_backplate_center_z / tan(body_theta));
+
+    move([0, -top_backplate_center_y * 1.02, top_backplate_center_z * 1.02]) {
+        xrot(body_theta) {
+            ymove(phone_y / 2 + body_wall_thickness) {
+                cuboid(
+                [phone_x + body_wall_thickness, backplate_y + body_wall_thickness, backplate_thickness],
+                align=V_BOTTOM + V_FRONT
+                );
+            }
         }
     }
 }
@@ -73,6 +90,7 @@ module body() {
         move([0, (body_y - body_y_top - (body_hollow_y_adjustment / 2)) / 2, body_z]) lid_recess();
         phone_socket_cutout();
     }
+    backplate();
 
     ymove(-pcb_mount_y + (body_hollow_y_bottom / 2) + body_hollow_y_adjustment + .001) {
         zmove(body_wall_thickness - .001) {

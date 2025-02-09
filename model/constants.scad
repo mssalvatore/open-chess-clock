@@ -45,3 +45,6 @@ pcb_mount_z = pcb_z_clearance + micro_pcb_thickness + pcb_mount_wall_thickness;
 pcb_mount_hole_x = 8;
 pcb_mount_hole_y = 33;
 pcb_mount_hole_diameter=3;
+
+backplate_thickness = 3;
+backplate_y = 15;
