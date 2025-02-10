@@ -1,6 +1,6 @@
 include <hotswap_pcb_generator/scad/parameters.scad>
 
-function calculate_y_offset(base, z_offset, theta) = ((tan(theta) * base) - z_offset) / tan(theta);
+function calculate_y_offset(base, height, z_offset) = (base * (height - z_offset)) / height;
 
 phone_x = 168; // Any bigger and my printer can't handle it.
 phone_y = 85;
@@ -18,10 +18,11 @@ body_y = 90 + (2 * body_wall_thickness);
 body_z = sin(body_theta) * (phone_y +  body_wall_thickness + lid_z);
 body_x = phone_x + ((body_z / sin(body_theta)) - phone_y) + (body_edge_radius / 2);
 body_hollow_x = body_x - (2 * body_wall_thickness);
-body_hollow_y = body_y - (body_wall_thickness + body_front_thickness);
-body_hollow_y_bottom = calculate_y_offset(body_hollow_y, body_wall_thickness, body_theta);
-body_hollow_y_top = calculate_y_offset(body_hollow_y, body_z, body_theta);
-body_y_top = calculate_y_offset(body_y, body_z, body_theta);
+body_hollow_y = body_y - body_wall_thickness - (body_front_thickness / cos(90 - body_theta));
+body_hollow_z = tan(body_theta) * body_hollow_y;
+body_hollow_y_bottom = calculate_y_offset(body_hollow_y, body_hollow_z, body_wall_thickness);
+body_hollow_y_top = calculate_y_offset(body_hollow_y, body_hollow_z, body_z);
+body_y_top = calculate_y_offset(body_y, tan(body_theta) * body_y, body_z);
 
 lid_x = body_x - (2 * lid_lip);
 lid_y =  body_y_top - (2 * lid_lip);

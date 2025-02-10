@@ -10,7 +10,6 @@ include <constants.scad>
 $fn=64;
 
 module body_hollow() {
-    thickness_offset_x = 2 * body_wall_thickness;
     rounded_prismoid(
         size1=[
             body_hollow_x,
@@ -99,7 +98,7 @@ module backplate() {
     backplate_center_z = (body_z - body_wall_thickness) / 2;
     backplate_center_y = (body_hollow_y_bottom / 2) - (backplate_center_z / tan(body_theta));
 
-    move([0, -backplate_center_y * 1.01, backplate_center_z * 1.01]) {
+    move([0, -backplate_center_y - .001, backplate_center_z + .001]) {
         xrot(body_theta) {
             yspread(phone_y - backplate_width, n=2) {
                 cuboid(
