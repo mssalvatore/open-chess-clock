@@ -17,6 +17,7 @@ body_edge_radius = 4;
 body_y = 90 + (2 * body_wall_thickness);
 body_z = sin(body_theta) * (phone_y +  body_wall_thickness + lid_z);
 body_x = phone_x + ((body_z / sin(body_theta)) - phone_y) + (body_edge_radius / 2);
+body_hollow_x = body_x - (2 * body_wall_thickness);
 body_hollow_y = body_y - (body_wall_thickness + body_front_thickness);
 body_hollow_y_bottom = calculate_y_offset(body_hollow_y, body_wall_thickness, body_theta);
 body_hollow_y_top = calculate_y_offset(body_hollow_y, body_z, body_theta);
@@ -32,18 +33,15 @@ socket_hole_dimension = socket_size;
 switch_spacing = lid_x - socket_hole_dimension - ((lid_lip + socket_edge_offset) * 2);
 switch_z_offset = pcb_thickness / 2;
 
-micro_pcb_thickness = 1.75; // Actual thickness is 1.71, this gives a bit of clearance.
+micro_pcb_thickness = 1.6;
 pcb_mount_wall_thickness = 1.6;
 pcb_x = 18.25;
-pcb_insert_depth = 6;
+pcb_y = 37;
+pcb_insert_depth = 2.6;
 pcb_z_clearance = 5;
 pcb_mount_x = pcb_x + (2 * pcb_mount_wall_thickness);
 pcb_mount_y = pcb_insert_depth + pcb_mount_wall_thickness;
 pcb_mount_z = pcb_z_clearance + micro_pcb_thickness + pcb_mount_wall_thickness;
-// estimated
-pcb_mount_hole_x = 8;
-pcb_mount_hole_y = 33;
-pcb_mount_hole_diameter=3;
 
 backplate_thickness = 3;
 backplate_width = 15;

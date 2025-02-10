@@ -13,11 +13,11 @@ module body_hollow() {
     thickness_offset_x = 2 * body_wall_thickness;
     rounded_prismoid(
         size1=[
-            body_x - thickness_offset_x,
+            body_hollow_x,
             body_hollow_y_bottom
         ],
         size2=[
-            body_x - thickness_offset_x,
+            body_hollow_x,
             body_hollow_y_top
         ],
         h=body_z - body_wall_thickness + .001,
@@ -38,13 +38,27 @@ module lid_recess() {
 }
 
 module pcb_mount() {
-    difference() {
-        cuboid([pcb_mount_x, pcb_mount_y, pcb_mount_z], align=V_TOP + V_BACK);
-        move([0, -.001, pcb_z_clearance]) cuboid([pcb_x, pcb_insert_depth, micro_pcb_thickness], align=V_TOP + V_BACK);
-    }
-    move([pcb_mount_hole_x, -pcb_mount_hole_y, 0]) {
-        cyl(d=pcb_mount_hole_diameter * 1.5, h=pcb_z_clearance, align=V_TOP);
-        zmove(pcb_z_clearance) cyl(d=pcb_mount_hole_diameter, h=micro_pcb_thickness * 1.5, align=V_TOP);
+    yrot(-90) {
+        xmove(pcb_mount_x / 2) {
+            difference() {
+                cuboid([pcb_mount_x, pcb_mount_y, pcb_mount_z], align=V_TOP + V_BACK);
+                move([0, -.001, pcb_z_clearance]) {
+                    cuboid([pcb_x, pcb_insert_depth, micro_pcb_thickness], align=V_TOP + V_BACK);
+                }
+            }
+        }
+        difference() {
+            cuboid(
+                [pcb_insert_depth + pcb_mount_wall_thickness, pcb_y, pcb_mount_z],
+                align=V_TOP + V_FRONT + V_RIGHT
+            );
+            move([pcb_mount_wall_thickness + .001, .001, pcb_z_clearance]) {
+                cuboid(
+                    [pcb_insert_depth, pcb_y + .002, micro_pcb_thickness],
+                    align=V_TOP + V_FRONT + V_RIGHT
+                );
+            }
+        }
     }
 }
 
@@ -135,9 +149,11 @@ module body() {
         }
     }
 
-    ymove(-pcb_mount_y + (body_hollow_y_bottom / 2) + body_hollow_y_adjustment + .001) {
-        zmove(body_wall_thickness - .001) {
-            pcb_mount();
+    xmove(body_hollow_x / 2 + .001) {
+        ymove(pcb_y / 2) {
+            zmove(body_wall_thickness - .001) {
+                pcb_mount();
+            }
         }
     }
 }
