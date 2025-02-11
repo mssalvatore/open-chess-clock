@@ -89,10 +89,10 @@ module usb_cable_relief() {
 
 module phone_socket_cutout() {
     phone_socket_center_z = body_z / 2;
-    phone_socket_center_y = (body_y / 2) - (phone_socket_center_z / tan(body_theta));
+    phone_socket_center_y = (body_y / 2) - (phone_socket_center_z / tan(theta));
 
     move([0, -phone_socket_center_y - .002, phone_socket_center_z + .001]) {
-        xrot(body_theta) {
+        xrot(theta) {
             cuboid([phone_x - .002, phone_y - .002, body_wall_thickness + .004], align=V_BOTTOM);
             xmove(phone_x / 2) {
                 usb_cable_relief();
@@ -104,11 +104,11 @@ module phone_socket_cutout() {
 module backplate() {
     backplate_center_z = (body_z / 2) - body_floor_thickness;
     backplate_center_y = (
-        (body_hollow_y / 2) - body_hollow_y_adjustment - (backplate_center_z / tan(body_theta))
+        (body_hollow_y / 2) - body_hollow_y_adjustment - (backplate_center_z / tan(theta))
     );
 
     move([0, -backplate_center_y - .001, backplate_center_z + .001]) {
-        xrot(body_theta) {
+        xrot(theta) {
             yspread(phone_y - backplate_width, n=2) {
                 cuboid(
                 [
@@ -139,11 +139,11 @@ module tension_bar_cutout() {
     cutout_y = (2 * tension_bar_y) - tension_bar_wall;
     cutout_z = tension_bar_z + tension_bar_tolerance ;
 
-    z_pos = cos(body_theta) * cutout_z + sin(body_theta) * cutout_y;
-    y_pos = (body_y / 2) - tension_bar_wall - (z_pos / tan(body_theta));
+    z_pos = cos(theta) * cutout_z + sin(theta) * cutout_y;
+    y_pos = (body_y / 2) - tension_bar_wall - (z_pos / tan(theta));
 
     move([0, -y_pos, z_pos]) {
-        xrot(body_theta) {
+        xrot(theta) {
             cuboid([cutout_x, cutout_y, cutout_z], align=V_BOTTOM + V_FRONT);
         }
     }
@@ -156,13 +156,13 @@ module body() {
                 rounded_prismoid(
                     size1=[body_x, body_y],
                     size2=[body_x, 0],
-                    h=body_y * tan(body_theta),
+                    h=body_y * tan(theta),
                     shift=[0,body_y / 2],
                     r=body_edge_radius
                 );
                 move([0, body_hollow_y_adjustment, -.001]) body_hollow();
                 zmove(body_z) {
-                    cuboid([body_x * 1.1, body_y * 1.1, body_y * tan(body_theta)], align=V_TOP);
+                    cuboid([body_x * 1.1, body_y * 1.1, body_y * tan(theta)], align=V_TOP);
                 }
 
             }

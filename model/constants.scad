@@ -6,23 +6,23 @@ phone_x = 168; // Any bigger and my printer can't handle it.
 phone_y = 78;
 phone_z = 10;
 
-body_theta = 60;
+theta = 60;
 body_wall_thickness = phone_z + 1;
 body_floor_thickness = 4;
-body_front_y_offset = body_wall_thickness / sin(body_theta);
+body_front_y_offset = body_wall_thickness / sin(theta);
 
 lid_lip = body_wall_thickness / 2;
 lid_z = 8.5;
 
 body_edge_radius = 4;
 body_y = 90;
-body_z_peak = tan(body_theta) * body_y;
-body_z = sin(body_theta) * (phone_y +  body_wall_thickness + lid_z);
-body_x = phone_x + ((body_z / sin(body_theta)) - phone_y) + (body_edge_radius / 2);
+body_z_peak = tan(theta) * body_y;
+body_z = sin(theta) * (phone_y +  body_wall_thickness + lid_z);
+body_x = phone_x + ((body_z / sin(theta)) - phone_y) + (body_edge_radius / 2);
 
 body_hollow_x = body_x - (2 * body_wall_thickness);
 body_hollow_y = body_y - body_wall_thickness - body_front_y_offset;
-body_hollow_z_peak = tan(body_theta) * body_hollow_y;
+body_hollow_z_peak = tan(theta) * body_hollow_y;
 body_hollow_z = body_z * body_hollow_y / body_y;
 body_hollow_y_adjustment = (body_front_y_offset -body_wall_thickness) / 2;
 
@@ -59,5 +59,5 @@ tension_bar_tolerance = 0.25;
 tension_bar_x_depth = 2;
 tension_bar_wall = 1.25;
 tension_bar_x = phone_x + 2 * tension_bar_x_depth;
-tension_bar_y = (body_wall_thickness / 2) / sin(body_theta);
+tension_bar_y = (body_wall_thickness / 2) / sin(theta);
 tension_bar_z = phone_z - 2 * tension_bar_wall;
