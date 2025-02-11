@@ -102,7 +102,7 @@ module phone_socket_cutout() {
 }
 
 module backplate() {
-    backplate_center_z = (body_hollow_z / 2) + body_floor_thickness;
+    backplate_center_z = (body_z / 2) - body_floor_thickness;
     backplate_center_y = (
         (body_hollow_y / 2) - body_hollow_y_adjustment - (backplate_center_z / tan(body_theta))
     );
