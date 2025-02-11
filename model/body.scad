@@ -160,8 +160,8 @@ module body() {
     }
 
     xmove(body_hollow_x / 2 + .001) {
-        ymove(pcb_y / 2) {
-            zmove(body_wall_thickness - .001) {
+        ymove((body_hollow_y / 2) - pcb_mount_y + body_hollow_y_adjustment + .001) {
+            zmove(pcb_mount_y - .001) {
                 pcb_mount();
             }
         }
