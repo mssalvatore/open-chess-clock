@@ -15,7 +15,7 @@ lid_lip = body_wall_thickness / 2;
 lid_z = 8.5;
 
 body_edge_radius = 4;
-body_y = 90 + (2 * body_wall_thickness);
+body_y = 90;
 body_z_peak = tan(body_theta) * body_y;
 body_z = sin(body_theta) * (phone_y +  body_wall_thickness + lid_z);
 body_x = phone_x + ((body_z / sin(body_theta)) - phone_y) + (body_edge_radius / 2);
