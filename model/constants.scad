@@ -3,7 +3,7 @@ include <hotswap_pcb_generator/scad/parameters.scad>
 function calculate_y_offset(base, height, z_offset) = (base * (height - z_offset)) / height;
 
 phone_x = 168; // Any bigger and my printer can't handle it.
-phone_y = 85;
+phone_y = 78;
 phone_z = 10;
 
 body_theta = 60;
@@ -54,3 +54,10 @@ backplate_width = 15;
 usb_cable_width= 8;
 usb_plug_width= 14;
 usb_cable_protrusion = 1;
+
+tension_bar_tolerance = 0.25;
+tension_bar_x_depth = 2;
+tension_bar_wall = 1.25;
+tension_bar_x = phone_x + 2 * tension_bar_x_depth;
+tension_bar_y = (body_wall_thickness / 2) / sin(body_theta);
+tension_bar_z = phone_z - 2 * tension_bar_wall;

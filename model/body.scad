@@ -134,6 +134,21 @@ module backplate() {
     }
 }
 
+module tension_bar_cutout() {
+    cutout_x = tension_bar_x + (2 * tension_bar_tolerance);
+    cutout_y = (2 * tension_bar_y) - tension_bar_wall;
+    cutout_z = tension_bar_z + tension_bar_tolerance ;
+
+    z_pos = cos(body_theta) * cutout_z + sin(body_theta) * cutout_y;
+    y_pos = (body_y / 2) - tension_bar_wall - (z_pos / tan(body_theta));
+
+    move([0, -y_pos, z_pos]) {
+        xrot(body_theta) {
+            cuboid([cutout_x, cutout_y, cutout_z], align=V_BOTTOM + V_FRONT);
+        }
+    }
+}
+
 module body() {
     difference() {
         union() {
@@ -157,6 +172,7 @@ module body() {
         move([0, (body_y - body_y_top) / 2, body_z + .001]) {
             lid_recess();
         }
+        color([1, 1, 1, 1]) tension_bar_cutout();
     }
 
     xmove(body_hollow_x / 2 + .001) {
