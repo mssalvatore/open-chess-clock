@@ -6,7 +6,7 @@ phone_x = 168; // Any bigger and my printer can't handle it.
 phone_y = 85;
 phone_z = 10;
 
-body_theta = 68;
+body_theta = 60;
 body_wall_thickness = phone_z + 1;
 body_floor_thickness = 4;
 body_front_y_offset = body_wall_thickness / sin(body_theta);
