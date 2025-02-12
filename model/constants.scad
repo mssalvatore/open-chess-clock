@@ -61,3 +61,5 @@ tension_bar_wall = 1.25;
 tension_bar_x = phone_x + 2 * tension_bar_x_depth;
 tension_bar_y = (body_wall_thickness / 2) / sin(theta);
 tension_bar_z = phone_z - 2 * tension_bar_wall;
+
+wire_channel_bend_diameter = wire_diameter * 6;

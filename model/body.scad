@@ -189,20 +189,65 @@ module switch_socket_hole() {
 }
 
 module switch_socket_1() {
-    move([-socket_dimension / 2, socket_dimension / 2, switch_z_offset]) switch_socket();
+    zrot(90) move([-socket_dimension / 2, socket_dimension / 2, switch_z_offset]) switch_socket();
 }
 
 module lid() {
     difference() {
-        cuboid(
-            [lid_x, lid_y, lid_z],
-            align=V_TOP,
-            fillet=body_edge_radius,
-            edges=EDGE_FR_RT+ EDGE_FR_LF + EDGE_BK_RT + EDGE_BK_LF
-        );
-        xspread(switch_spacing, 2) switch_socket_hole();
+        union() {
+            difference() {
+                cuboid(
+                    [lid_x, lid_y, lid_z],
+                    align=V_TOP,
+                    fillet=body_edge_radius,
+                    edges=EDGE_FR_RT+ EDGE_FR_LF + EDGE_BK_RT + EDGE_BK_LF
+                );
+                xspread(switch_spacing, 2) switch_socket_hole();
+            }
+            xspread(switch_spacing, 2) switch_socket_1();
+        }
+
+        ground_wire_channel();
+        left_data_wire_channel();
+        right_data_wire_channel();
     }
-    xspread(switch_spacing, 2) switch_socket_1();
+}
+
+module ground_wire_channel() {
+        zmove(switch_z_offset) wire_channel([0, -3*mx_schematic_unit], true, lid_x * 1.5);
+}
+
+module left_data_wire_channel() {
+    channel_length = lid_x / 2;
+    channel_midpoint = switch_spacing / 2 + channel_length / 2;
+    move([channel_midpoint, 3 * mx_schematic_unit, switch_z_offset]) {
+        wire_channel([0, 0], true, channel_length);
+    }
+}
+
+module right_data_wire_channel() {
+    // the wire_channel() module produces channels that are off-center by 4 units
+    recenter_adjustment = -4 * mx_schematic_unit;
+
+    channel_y = 3 * mx_schematic_unit;
+    channel_length = lid_x / 2;
+    channel_midpoint = -(switch_spacing / 2 - lid_x / 4);
+    channel_end = channel_midpoint + channel_length / 2;
+
+    wire_channel_bend_offset = wire_channel_bend_diameter / 4;
+    bend_1_x = channel_end + wire_channel_bend_offset;
+    bend_1_y = channel_y + wire_diameter;
+
+    move([channel_midpoint, 0, switch_z_offset])
+        wire_channel([-recenter_adjustment, 3 * mx_schematic_unit], true, channel_length);
+    move([bend_1_x, bend_1_y, 0])
+        wire_channel_bend();
+    move([bend_1_x + channel_length / 2, bend_1_y + wire_channel_bend_offset, switch_z_offset])
+        wire_channel([-recenter_adjustment, 0], true, channel_length);
+}
+
+module wire_channel_bend() {
+    cyl(d = wire_channel_bend_diameter, h = 2.25 * wire_diameter, center=true);
 }
 
 body();
