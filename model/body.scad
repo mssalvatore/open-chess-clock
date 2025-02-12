@@ -145,6 +145,15 @@ module tension_bar_cutout() {
     move([0, -y_pos, z_pos]) {
         xrot(theta) {
             cuboid([cutout_x, cutout_y, cutout_z], align=V_BOTTOM + V_FRONT);
+            tension_bar_cutout_spring_holes(cutout_x, cutout_y, cutout_z);
+        }
+    }
+}
+
+module tension_bar_cutout_spring_holes(cutout_x, cutout_y, cutout_z) {
+    xspread(n=5, l=cutout_x - spring_hole_diameter - 2 *  body_wall_thickness) {
+        move([0, -(cutout_y - .001), -(cutout_z / 2)]) {
+            cyl(d=spring_hole_diameter, h=spring_hole_depth, align=V_FRONT, orient=ORIENT_Y);
         }
     }
 }

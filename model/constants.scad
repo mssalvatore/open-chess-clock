@@ -63,3 +63,9 @@ tension_bar_y = (body_wall_thickness / 2) / sin(theta);
 tension_bar_z = phone_z - 2 * tension_bar_wall;
 
 wire_channel_bend_diameter = wire_diameter * 6;
+spring_hole_diameter = 4.7;
+// 3mm is a good depth, but these cut through the bottom of the body.
+// Adjustments need to be made to the body to accomodate a more adjustable
+// tension bar anyway.
+//spring_hole_depth = 1;
+spring_hole_depth = 3;
