@@ -43,12 +43,12 @@ socket_latch_x_offset = (socket_hole_dimension / 2) - .001;
 switch_spacing = lid_x - socket_hole_dimension - ((lid_lip + socket_edge_offset) * 2);
 switch_z_offset = pcb_thickness / 2;
 
-micro_pcb_thickness = 1.6;
-pcb_mount_wall_thickness = 1.6;
-pcb_x = 18.25;
-pcb_y = 37;
+micro_pcb_thickness = 1.55;
+pcb_mount_wall_thickness = 1.75;
+pcb_x = 18;
+pcb_y = 36.2;
 pcb_insert_depth = 2.6;
-pcb_z_clearance = 5;
+pcb_z_clearance = 7;
 pcb_mount_x = pcb_x + (2 * pcb_mount_wall_thickness);
 pcb_mount_y = pcb_insert_depth + pcb_mount_wall_thickness;
 pcb_mount_z = pcb_z_clearance + micro_pcb_thickness + pcb_mount_wall_thickness;
