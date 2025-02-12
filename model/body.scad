@@ -242,7 +242,7 @@ module right_data_wire_channel() {
         wire_channel([-recenter_adjustment, 3 * mx_schematic_unit], true, channel_length);
     move([bend_1_x, bend_1_y, 0])
         wire_channel_bend();
-    move([bend_1_x + channel_length / 2, bend_1_y + wire_channel_bend_offset, switch_z_offset])
+    move([bend_1_x + channel_length / 2, bend_1_y + wire_channel_bend_offset / 2.5, switch_z_offset])
         wire_channel([-recenter_adjustment, 0], true, channel_length);
 }
 
