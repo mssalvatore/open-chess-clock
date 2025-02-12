@@ -12,7 +12,7 @@ body_floor_thickness = 4;
 body_front_y_offset = body_wall_thickness / sin(theta);
 
 lid_lip = 4;
-lid_z = 8.5;
+lid_z = 9;
 
 body_edge_radius = 4;
 body_y = 90;
@@ -34,7 +34,12 @@ lid_tolerance = .2;
 
 socket_edge_offset = 10;
 socket_dimension = socket_size + (h_border_width * 2);
-socket_hole_dimension = socket_size;
+socket_hole_dimension = socket_size - 0.3;
+socket_latch_x  = 2.5;
+socket_latch_y = 4.75;
+socket_latch_z = 3.5;
+socket_latch_z_offset = 1.25;
+socket_latch_x_offset = (socket_hole_dimension / 2) - .001;
 switch_spacing = lid_x - socket_hole_dimension - ((lid_lip + socket_edge_offset) * 2);
 switch_z_offset = pcb_thickness / 2;
 

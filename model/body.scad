@@ -195,6 +195,18 @@ module body() {
 
 module switch_socket_hole() {
     zmove(-.001) cuboid([socket_hole_dimension, socket_hole_dimension, lid_z + .002], align=V_TOP);
+    zmove(lid_z - socket_latch_z_offset) {
+        xmove(socket_latch_x_offset) {
+            switch_latch_hole();
+        }
+        xmove(-socket_latch_x_offset) {
+            switch_latch_hole();
+        }
+    }
+}
+
+module switch_latch_hole() {
+    cuboid([socket_latch_x, socket_latch_y, socket_latch_z], align=V_BOTTOM);
 }
 
 module switch_socket_1() {
