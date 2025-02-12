@@ -219,8 +219,8 @@ module ground_wire_channel() {
 
 module left_data_wire_channel() {
     channel_length = lid_x / 2;
-    channel_midpoint = switch_spacing / 2 + channel_length / 2;
-    move([channel_midpoint, 3 * mx_schematic_unit, switch_z_offset]) {
+    channel_midpoint = switch_spacing - lid_lip - (2 * socket_dimension);
+    move([channel_midpoint, 4.25 * mx_schematic_unit, switch_z_offset]) {
         wire_channel([0, 0], true, channel_length);
     }
 }
@@ -229,8 +229,8 @@ module right_data_wire_channel() {
     // the wire_channel() module produces channels that are off-center by 4 units
     recenter_adjustment = -4 * mx_schematic_unit;
 
-    channel_y = 3 * mx_schematic_unit;
-    channel_length = lid_x / 2;
+    channel_y = 4.25 * mx_schematic_unit;
+    channel_length = lid_x / 2 + (2 * socket_dimension);
     channel_midpoint = -(switch_spacing / 2 - lid_x / 4);
     channel_end = channel_midpoint + channel_length / 2;
 
@@ -239,7 +239,7 @@ module right_data_wire_channel() {
     bend_1_y = channel_y + wire_diameter;
 
     move([channel_midpoint, 0, switch_z_offset])
-        wire_channel([-recenter_adjustment, 3 * mx_schematic_unit], true, channel_length);
+        wire_channel([-recenter_adjustment, channel_y], true, channel_length);
     move([bend_1_x, bend_1_y, 0])
         wire_channel_bend();
     move([bend_1_x + channel_length / 2, bend_1_y + wire_channel_bend_offset / 2.5, switch_z_offset])
