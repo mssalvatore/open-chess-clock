@@ -20,7 +20,7 @@ body_z_peak = tan(theta) * body_y;
 body_z = sin(theta) * (phone_y +  body_wall_thickness + lid_z);
 body_x = phone_x + ((body_z / sin(theta)) - phone_y) + (body_edge_radius / 2);
 
-body_hollow_x = body_x - body_wall_thickness;
+body_hollow_x = body_x - (1.25 * body_wall_thickness) ;
 body_hollow_y = body_y - body_wall_thickness - body_front_y_offset;
 body_hollow_z_peak = tan(theta) * body_hollow_y;
 body_hollow_z = body_z * body_hollow_y / body_y;

@@ -1,4 +1,5 @@
 include <BOSL/constants.scad>
+use <BOSL/paths.scad>
 use <BOSL/shapes.scad>
 use <BOSL/transforms.scad>
 
@@ -179,6 +180,33 @@ module tension_bar_cutout_spring_holes(cutout_x, cutout_y, cutout_z) {
     }
 }
 
+module cable_channel() {
+    segment_unit = body_hollow_z / 3;
+    cable_channel_x = 3;
+    cable_channel_y = 20;
+    channel_theta = -60;
+    x_depth = cos(channel_theta) * segment_unit / 3.2 ;
+
+    x = [0, x_depth, x_depth, 0];
+    z = [0, -segment_unit * 0.5, 2 * -segment_unit, 2.5 * -segment_unit];
+    skew_angle = atan((body_hollow_y / 5) / z[3]);
+
+    path = [
+        [x[0], 0, z[0]],
+        [x[1], 0, z[1]],
+        [x[2], 0, z[2]],
+        [x[3], 0, z[3]]
+    ];
+
+    skew_xy(xa=0, ya=-skew_angle) {
+        move([body_hollow_x / 2, 0, 0]) {
+            extrude_2d_shapes_along_3dpath(path=path) {
+                square([cable_channel_x, cable_channel_y], center=true);
+            }
+        }
+    }
+
+}
 module body() {
     difference() {
         union() {
@@ -201,6 +229,7 @@ module body() {
         phone_socket_cutout();
         move([0, (body_y - body_y_top) / 2, body_z + .001]) {
             lid_recess();
+            cable_channel();
         }
         color([1, 1, 1, 1]) tension_bar_cutout();
     }
