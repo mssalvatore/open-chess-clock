@@ -57,8 +57,8 @@ backplate_thickness = 3;
 backplate_width = 15;
 
 usb_cable_width= 8;
-usb_plug_width= 14;
-usb_cable_protrusion = 1;
+usb_plug_width= 18;
+usb_cable_protrusion = 2.25;
 
 tension_bar_tolerance = 0.25;
 tension_bar_x_depth = 2;
