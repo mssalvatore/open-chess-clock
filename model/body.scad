@@ -36,7 +36,7 @@ module body_hollow() {
 
 module lid_recess() {
     cuboid(
-        [lid_x + lid_tolerance, lid_y + lid_tolerance, lid_z + .001],
+        [lid_x, lid_y, lid_z + .001],
         align=V_BOTTOM,
         fillet=body_edge_radius,
         edges=EDGE_FR_RT+ EDGE_FR_LF + EDGE_BK_RT + EDGE_BK_LF

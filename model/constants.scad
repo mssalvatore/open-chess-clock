@@ -30,7 +30,6 @@ body_y_top = calculate_y_offset(body_y, body_z_peak, body_z);
 
 lid_x = body_hollow_x + (2 * lid_lip);
 lid_y =  body_y_top - (2 * lid_lip);
-lid_tolerance = .2;
 
 socket_edge_offset = 10;
 socket_dimension = socket_size + (h_border_width * 2);
