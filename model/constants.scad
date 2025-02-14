@@ -42,15 +42,6 @@ socket_latch_x_offset = (socket_hole_dimension / 2) - .001;
 switch_spacing = lid_x - socket_hole_dimension - ((lid_lip + socket_edge_offset) * 2);
 switch_z_offset = pcb_thickness / 2;
 
-controller_thickness = 1.55;
-controller_mount_wall_thickness = 1.75;
-controller_x = 18;
-controller_y = 36.2;
-controller_insert_depth = 2.6;
-controller_z_clearance = 7;
-controller_mount_x = controller_x + (2 * controller_mount_wall_thickness);
-controller_mount_y = controller_insert_depth + controller_mount_wall_thickness;
-controller_mount_z = controller_z_clearance + controller_thickness + controller_mount_wall_thickness;
 
 backplate_thickness = 3;
 backplate_width = 15;
