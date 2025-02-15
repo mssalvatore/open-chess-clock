@@ -15,7 +15,7 @@ lid_lip = 4;
 lid_z = 9;
 
 body_edge_radius = 4;
-body_y = 90;
+body_y = 100;
 body_z_peak = tan(theta) * body_y;
 body_z = sin(theta) * (phone_y +  body_wall_thickness + lid_z);
 body_x = phone_x + ((body_z / sin(theta)) - phone_y) + (body_edge_radius / 2);
@@ -49,6 +49,7 @@ backplate_width = 15;
 usb_cable_width= 8;
 usb_plug_width= 18;
 usb_cable_protrusion = 2.25;
+usb_cable_thickness = 0.8;
 
 tension_bar_tolerance = 0.25;
 tension_bar_x_depth = 2;

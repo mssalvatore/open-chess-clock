@@ -145,7 +145,7 @@ module cable_channel() {
 
     x = [0, x_depth, x_depth, 0];
     z = [0, -segment_unit * 0.5, 2 * -segment_unit, 2.5 * -segment_unit];
-    skew_angle = atan((body_hollow_y / 5) / z[3]);
+    skew_angle = atan(((lid_y / 3) - cable_channel_y / 2) / z[3]);
 
     path = [
         [x[0], 0, z[0]],
