@@ -55,7 +55,6 @@ module usb_cable_relief() {
 }
 
 module phone_socket_cutout() {
-    phone_socket_center_z = body_z / 2;
     phone_socket_center_y = (body_y / 2) - (phone_socket_center_z / tan(theta));
     phone_socket_z = body_wall_thickness + .004;
 
@@ -167,11 +166,6 @@ module body() {
     }
 
     controller_mount();
-    base_plate();
-}
-
-module base_plate() {
-    zmove(.001) cuboid([body_x, body_y, 1], fillet=body_edge_radius, align=V_BOTTOM, edges=EDGES_Z_ALL);
 }
 
 body();

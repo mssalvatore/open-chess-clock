@@ -28,8 +28,6 @@ body_hollow_y_adjustment = (body_front_y_offset -body_wall_thickness) / 2;
 
 body_y_top = calculate_y_offset(body_y, body_z_peak, body_z);
 
-base_plate_z = 1;
-
 lid_x = body_hollow_x + (2 * lid_lip);
 lid_y =  body_y_top - (2 * lid_lip);
 
@@ -54,3 +52,5 @@ usb_cable_protrusion = 2.25;
 usb_cable_thickness = 0.8;
 
 wire_channel_bend_diameter = wire_diameter * 6;
+
+phone_socket_center_z = body_z / 2;

@@ -12,13 +12,13 @@ tension_bar_y = 4;
 tension_bar_z = phone_z - 2 * tension_bar_wall;
 
 cutout_x = tension_bar_x + (2 * tension_bar_tolerance);
-cutout_y = 16;
+cutout_y = 15.5;
 cutout_z = tension_bar_z + tension_bar_tolerance ;
 
 
 
 module tension_bar_cutout() {
-    z_pos = cos(theta) * cutout_z + sin(theta) * cutout_y;
+    z_pos = phone_socket_center_z - sin(theta) * phone_y / 2 + sin(theta) * cutout_y - 2;
     y_pos = (body_y / 2) - tension_bar_wall - (z_pos / tan(theta));
 
     move([0, -y_pos, z_pos]) {
