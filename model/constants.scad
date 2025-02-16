@@ -28,6 +28,8 @@ body_hollow_y_adjustment = (body_front_y_offset -body_wall_thickness) / 2;
 
 body_y_top = calculate_y_offset(body_y, body_z_peak, body_z);
 
+base_plate_z = 1;
+
 lid_x = body_hollow_x + (2 * lid_lip);
 lid_y =  body_y_top - (2 * lid_lip);
 
@@ -51,17 +53,4 @@ usb_plug_width= 18;
 usb_cable_protrusion = 2.25;
 usb_cable_thickness = 0.8;
 
-tension_bar_tolerance = 0.25;
-tension_bar_x_depth = 2;
-tension_bar_wall = 1.25;
-tension_bar_x = phone_x + 2 * tension_bar_x_depth;
-tension_bar_y = (body_wall_thickness / 2) / sin(theta);
-tension_bar_z = phone_z - 2 * tension_bar_wall;
-
 wire_channel_bend_diameter = wire_diameter * 6;
-spring_hole_diameter = 4.7;
-// 3mm is a good depth, but these cut through the bottom of the body.
-// Adjustments need to be made to the body to accomodate a more adjustable
-// tension bar anyway.
-//spring_hole_depth = 1;
-spring_hole_depth = 3;

@@ -8,8 +8,9 @@ include <hotswap_pcb_generator/scad/parameters.scad>
 
 include <constants.scad>
 use <controller.scad>
+use <tension-bar.scad>
 
-$fn=64;
+$fn=256;
 
 module body_hollow() {
     difference() {
@@ -122,29 +123,6 @@ module backplate() {
     }
 }
 
-module tension_bar_cutout() {
-    cutout_x = tension_bar_x + (2 * tension_bar_tolerance);
-    cutout_y = (2 * tension_bar_y) - tension_bar_wall;
-    cutout_z = tension_bar_z + tension_bar_tolerance ;
-
-    z_pos = cos(theta) * cutout_z + sin(theta) * cutout_y;
-    y_pos = (body_y / 2) - tension_bar_wall - (z_pos / tan(theta));
-
-    move([0, -y_pos, z_pos]) {
-        xrot(theta) {
-            cuboid([cutout_x, cutout_y, cutout_z], align=V_BOTTOM + V_FRONT);
-            tension_bar_cutout_spring_holes(cutout_x, cutout_y, cutout_z);
-        }
-    }
-}
-
-module tension_bar_cutout_spring_holes(cutout_x, cutout_y, cutout_z) {
-    xspread(n=5, l=cutout_x - spring_hole_diameter - 2 *  body_wall_thickness) {
-        move([0, -(cutout_y - .001), -(cutout_z / 2)]) {
-            cyl(d=spring_hole_diameter, h=spring_hole_depth, align=V_FRONT, orient=ORIENT_Y);
-        }
-    }
-}
 
 module cable_channel() {
     segment_unit = body_hollow_z / 3;
@@ -201,6 +179,11 @@ module body() {
     }
 
     controller_mount();
+    base_plate();
+}
+
+module base_plate() {
+    zmove(.001) cuboid([body_x, body_y, 1], fillet=body_edge_radius, align=V_BOTTOM, edges=EDGES_Z_ALL);
 }
 
 module switch_socket_hole() {
