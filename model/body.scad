@@ -68,12 +68,22 @@ module usb_cable_relief() {
 module phone_socket_cutout() {
     phone_socket_center_z = body_z / 2;
     phone_socket_center_y = (body_y / 2) - (phone_socket_center_z / tan(theta));
+    phone_socket_z = body_wall_thickness + .004;
+
+    button_relief_x =  47.5;
+    button_relief_x_pos = -(phone_x/2 - button_relief_x /2 - 22.5);
+    button_relief_y_pos = phone_y / 2 - .001;
 
     move([0, -phone_socket_center_y - .002, phone_socket_center_z + .001]) {
         xrot(theta) {
-            cuboid([phone_x - .002, phone_y - .002, body_wall_thickness + .004], align=V_BOTTOM);
+            cuboid([phone_x - .002, phone_y - .002, phone_socket_z], align=V_BOTTOM);
             xmove(phone_x / 2) {
                 usb_cable_relief();
+            }
+            // Button relief
+            move([button_relief_x_pos, button_relief_y_pos, 0])
+            {
+                cuboid([button_relief_x, 2, phone_socket_z], align=V_BOTTOM);
             }
         }
     }
