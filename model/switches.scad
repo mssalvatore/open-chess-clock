@@ -23,18 +23,45 @@ switch_platform_x = socket_dimension + 2 * switch_border;
 switch_platform_y = socket_dimension + switch_border + 20;
 
 switch_socket_hole_y_pos = -(switch_platform_y - switch_border);
+// the wire_channel() module produces channels that are off-center by 4 units
+wire_channel_center_adjustment = 4 * mx_schematic_unit;
+wire_channel_protrusion = 10;
+wire_channel_length = switch_platform_y - switch_border + wire_channel_protrusion;
 
 module switch_platform() {
     difference() {
-        cuboid(
-            [switch_platform_x, switch_platform_y, switch_platform_z],
-            fillet=body_edge_radius,
-            edges=EDGES_Z_FR,
-            align=V_FRONT + V_TOP
-        );
-        switch_socket_hole();
+        union() {
+            difference() {
+                cuboid(
+                    [switch_platform_x, switch_platform_y, switch_platform_z],
+                    fillet=body_edge_radius,
+                    edges=EDGES_Z_FR,
+                    align=V_FRONT + V_TOP
+                );
+                switch_socket_hole();
+            }
+            switch_socket_1();
+        }
+
+        ground_wire_channel();
+        data_wire_channel();
     }
-    switch_socket_1();
+}
+
+module ground_wire_channel() {
+    platform_wire_channel(-3 * mx_schematic_unit);
+}
+
+module data_wire_channel() {
+    platform_wire_channel(2 * mx_schematic_unit);
+}
+
+module platform_wire_channel(xpos) {
+    ypos = wire_channel_center_adjustment - (wire_channel_length / 2) + wire_channel_protrusion;
+    zpos = switch_z_offset;
+        move([xpos, ypos, zpos]) {
+            zrot(90)wire_channel([0, 0], true, wire_channel_length);
+        }
 }
 
 module switch_socket_hole() {
