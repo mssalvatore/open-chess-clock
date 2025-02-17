@@ -1,4 +1,7 @@
-include <hotswap_pcb_generator/scad/parameters.scad>
+switch_platform_z = 9;
+
+
+// -------------------------------------------------------------------------------------------------
 
 function calculate_y_offset(base, height, z_offset) = (base * (height - z_offset)) / height;
 
@@ -31,16 +34,6 @@ body_y_top = calculate_y_offset(body_y, body_z_peak, body_z);
 lid_x = body_hollow_x + (2 * lid_lip);
 lid_y =  body_y_top - (2 * lid_lip);
 
-socket_edge_offset = 10;
-socket_dimension = socket_size + (h_border_width * 2);
-socket_hole_dimension = socket_size - 0.3;
-socket_latch_x  = 2.5;
-socket_latch_y = 4.75;
-socket_latch_z = 3.5;
-socket_latch_z_offset = 1.25;
-socket_latch_x_offset = (socket_hole_dimension / 2) - .001;
-switch_spacing = lid_x - socket_hole_dimension - ((lid_lip + socket_edge_offset) * 2);
-switch_z_offset = pcb_thickness / 2;
 
 
 backplate_thickness = 3;
