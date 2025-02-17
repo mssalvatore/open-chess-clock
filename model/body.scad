@@ -8,6 +8,7 @@ use <controller.scad>
 use <lid.scad>
 use <tension-bar.scad>
 
+echo(body_z);
 $fn=256;
 
 module body_hollow() {
@@ -112,7 +113,7 @@ module backplate() {
 
 
 module cable_channel() {
-    segment_unit = body_hollow_z / 3;
+    segment_unit = body_hollow_z / 3.6;
     cable_channel_x = 3;
     cable_channel_y = 20;
     channel_theta = -60;
@@ -120,7 +121,7 @@ module cable_channel() {
 
     x = [0, x_depth, x_depth, 0];
     z = [0, -segment_unit * 0.5, 2 * -segment_unit, 2.5 * -segment_unit];
-    skew_angle = atan(((lid_y / 3) - cable_channel_y / 2) / z[3]);
+    skew_angle = -atan(((lid_y / 3) - cable_channel_y / 2) / z[3]);
 
     path = [
         [x[0], 0, z[0]],
@@ -169,4 +170,3 @@ module body() {
 }
 
 body();
-ymove(100) lid();

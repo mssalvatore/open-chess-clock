@@ -6,7 +6,7 @@ phone_x = 168; // Any bigger and my printer can't handle it.
 phone_y = 78;
 phone_z = 10;
 
-theta = 60;
+theta = 68.5;
 body_wall_thickness = phone_z + 1;
 body_floor_thickness = 4;
 body_front_y_offset = body_wall_thickness / sin(theta);
@@ -15,10 +15,10 @@ lid_lip = 4;
 lid_z = 9;
 
 body_edge_radius = 4;
-body_y = 100;
+body_y = 65;
 body_z_peak = tan(theta) * body_y;
 body_z = sin(theta) * (phone_y +  body_wall_thickness + lid_z);
-body_x = phone_x + ((body_z / sin(theta)) - phone_y) + (body_edge_radius / 2);
+body_x = phone_x + body_wall_thickness;
 
 body_hollow_x = body_x - (1.25 * body_wall_thickness) ;
 body_hollow_y = body_y - body_wall_thickness - body_front_y_offset;
