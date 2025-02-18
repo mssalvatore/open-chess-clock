@@ -1,8 +1,43 @@
+include <hotswap_pcb_generator/scad/parameters.scad>
+
+socket_dimension = socket_size + (h_border_width * 2);
 switch_platform_z = 9;
+switch_border = 3;
+switch_platform_x = socket_dimension + 2 * switch_border;
+switch_platform_y = socket_dimension + switch_border + 30;
+switch_z_offset = pcb_thickness / 2;
+
+controller_x = 18;
+controller_y = 36.2;
+controller_z = 1.55;
+controller_wall_thickness = 1.75;
+controller_insert_depth = 2.6;
+
+controller_top_clearance = 5;
+controller_bottom_clearance = 7.5;
+
+controller_mount_long_side_x = controller_y + controller_wall_thickness;
+controller_mount_long_side_y = controller_wall_thickness + controller_insert_depth;
+controller_mount_long_side_z = controller_bottom_clearance + controller_z + controller_top_clearance;
+
+controller_short_side_x = controller_mount_long_side_y;
+controller_short_side_y = (2 * controller_wall_thickness) + controller_x;
+controller_short_side_z = controller_mount_long_side_z;
+
+
+cavity_x = controller_mount_long_side_x + controller_short_side_x - controller_insert_depth;
+cavity_y = 42;
+cavity_z = controller_mount_long_side_z;
+
+cable_channel_dimension = cavity_z;
+
+wire_slot_x = cavity_x / 2;
+wire_slot_y = wire_slot_x / 2;
 
 
 // -------------------------------------------------------------------------------------------------
 
+/*
 function calculate_y_offset(base, height, z_offset) = (base * (height - z_offset)) / height;
 
 phone_x = 168; // Any bigger and my printer can't handle it.
@@ -47,3 +82,4 @@ usb_cable_thickness = 0.8;
 wire_channel_bend_diameter = wire_diameter * 6;
 
 phone_socket_center_z = body_z / 2;
+*/

@@ -7,7 +7,6 @@ use <hotswap_pcb_generator/scad/switch.scad>
 
 include <constants.scad>
 
-socket_dimension = socket_size + (h_border_width * 2);
 socket_hole_dimension = socket_size - 0.3;
 
 socket_latch_x = 4.75;
@@ -16,17 +15,13 @@ socket_latch_z = 3.5;
 socket_latch_z_offset = 1.25;
 socket_latch_x_offset = (socket_hole_dimension / 2)  + (socket_latch_x / 2) - .001;
 
-switch_z_offset = pcb_thickness / 2;
-switch_border = 3;
-
-switch_platform_x = socket_dimension + 2 * switch_border;
-switch_platform_y = socket_dimension + switch_border + 20;
 
 switch_socket_hole_y_pos = -(switch_platform_y - switch_border);
 // the wire_channel() module produces channels that are off-center by 4 units
 wire_channel_center_adjustment = 4 * mx_schematic_unit;
-wire_channel_protrusion = 10;
-wire_channel_length = switch_platform_y - switch_border + wire_channel_protrusion;
+wire_channel_length = switch_platform_y - 17;
+
+fillet = 4;
 
 module switch_platform() {
     difference() {
@@ -34,7 +29,7 @@ module switch_platform() {
             difference() {
                 cuboid(
                     [switch_platform_x, switch_platform_y, switch_platform_z],
-                    fillet=body_edge_radius,
+                    fillet=fillet,
                     edges=EDGES_Z_FR,
                     align=V_FRONT + V_TOP
                 );
@@ -57,7 +52,7 @@ module data_wire_channel() {
 }
 
 module platform_wire_channel(xpos) {
-    ypos = wire_channel_center_adjustment - (wire_channel_length / 2) + wire_channel_protrusion;
+    ypos = wire_channel_center_adjustment - (switch_platform_y / 2);
     zpos = switch_z_offset;
         move([xpos, ypos, zpos]) {
             zrot(90)wire_channel([0, 0], true, wire_channel_length);
