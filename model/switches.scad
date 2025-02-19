@@ -7,16 +7,16 @@ use <hotswap_pcb_generator/scad/switch.scad>
 
 include <constants.scad>
 
-socket_hole_dimension = socket_size - 0.3;
+socket_hole_dimension = socket_size + 0.1;
 
 socket_latch_x = 4.75;
-socket_latch_y  = 2.25;
+socket_latch_y  = 1.5;
 socket_latch_z = 3.5;
 socket_latch_z_offset = 1.25;
 socket_latch_x_offset = (socket_hole_dimension / 2)  + (socket_latch_x / 2) - .001;
 
 
-switch_socket_hole_y_pos = -(switch_platform_y - switch_border);
+switch_socket_hole_ypos = -(switch_platform_y - switch_border);
 // the wire_channel() module produces channels that are off-center by 4 units
 wire_channel_center_adjustment = 4 * mx_schematic_unit;
 wire_channel_length = switch_platform_y - 17;
@@ -59,7 +59,7 @@ module platform_wire_channel(xpos) {
 
 module switch_socket_hole() {
     xpos= 0;
-    ypos = switch_socket_hole_y_pos;
+    ypos = switch_socket_hole_ypos;
     zpos = -.001;
 
     move([xpos, ypos, zpos]) {
@@ -78,7 +78,7 @@ module switch_socket_hole() {
 
 module switch_socket_1() {
     xpos = -socket_dimension / 2;
-    ypos = socket_dimension - h_border_width + switch_socket_hole_y_pos;
+    ypos = (socket_dimension / 2) + (socket_hole_dimension / 2) + switch_socket_hole_ypos;
 
     move([xpos, ypos, switch_z_offset]) {
         switch_socket();
@@ -94,4 +94,5 @@ module switch_latch_hole() {
         cuboid([socket_latch_x, socket_latch_y, socket_latch_z], align=V_BOTTOM);
     }
 }
+
 switch_platform();
