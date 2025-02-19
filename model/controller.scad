@@ -6,7 +6,8 @@ include <constants.scad>
 
 
 module controller_mount() {
-    xpos = (controller_short_side_x - controller_insert_depth) / 2;
+    controller_total_x = controller_mount_short_side_x + controller_mount_long_side_x - controller_insert_depth;
+    xpos = (controller_mount_short_side_x - controller_insert_depth) / 2 - (cavity_x - controller_total_x) / 2;
     ypos = -controller_mount_long_side_y + cavity_y / 2;
 
     move([xpos, ypos, 0]){
@@ -18,12 +19,19 @@ module controller_mount() {
 module controller_mount_long_side() {
     alignment=V_TOP + V_BACK;
 
-    slot_xpos = -(controller_mount_long_side_x - controller_y + .002) / 2;
+    slot_xpos = -(controller_mount_long_side_x - controller_y) / 2 + .001;
     slop_ypos = -.001;
     slot_zpos = controller_bottom_clearance - (controller_z / 2);
 
     difference() {
-        cuboid([controller_mount_long_side_x, controller_mount_long_side_y, controller_mount_long_side_z], align=alignment);
+        cuboid(
+            [
+                controller_mount_long_side_x,
+                controller_mount_long_side_y,
+                controller_mount_long_side_z
+            ],
+            align=alignment
+        );
         move([slot_xpos, -.001, slot_zpos]) {
             cuboid([controller_y, controller_insert_depth, controller_z], align=alignment);
         }
@@ -34,7 +42,7 @@ module controller_mount_short_side() {
     alignment = V_TOP + V_FRONT + V_LEFT;
 
     slot_xpos = .001;
-    slot_ypos = .001;
+    slot_ypos = -.001;
     slot_zpos = controller_bottom_clearance - (controller_z / 2);
 
     xpos = -(controller_mount_long_side_x / 2 - controller_insert_depth - .001);
@@ -42,7 +50,14 @@ module controller_mount_short_side() {
 
     move([xpos, ypos, 0]) {
         difference() {
-            cuboid([controller_short_side_x, controller_short_side_y, controller_short_side_z], align=alignment);
+            cuboid(
+                [
+                    controller_mount_short_side_x,
+                    controller_mount_short_side_y,
+                    controller_mount_short_side_z
+                ],
+                align=alignment
+            );
             move([slot_xpos, slot_ypos, slot_zpos]) {
                 cuboid([controller_insert_depth, controller_x, controller_z], align=alignment);
             }

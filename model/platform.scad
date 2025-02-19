@@ -9,7 +9,7 @@ use <switches.scad>
 cavity_border = 3;
 floor_thickness = 2.5;
 usb_cable_connector_length = 40;
-platform_x = cavity_x + usb_cable_connector_length;
+platform_x = cavity_x + usb_cable_connector_length - 3;
 platform_y = cavity_y + 2 * cavity_border; // TODO: Fix magic number
 platform_z = cavity_z + 2 * floor_thickness; // TODO: Fix magic number
 
@@ -34,7 +34,6 @@ lid_screw_head_diameter = 10;
 lid_screw_head_height = 2.75;
 lid_nut_diameter = 10.4;
 lid_screw_xpos = phone_clamp_depth / 2 + lid_screw_head_diameter / 2 + 1;
-lid_screw_ypos = -2; // TODO: Fix magic number
 
 
 
@@ -110,7 +109,7 @@ module wire_bends() {
 
 module right_switch_wire_channels() {
     // TODO: Make this parametric
-    move([-16, -((cavity_y / 2) -(wire_slot_y / 2) - 0.75), 0]) {
+    move([-22, -((cavity_y / 2) -(wire_slot_y / 2) - 0.75), 0]) {
         zrot(90) {
             ground_wire_channel();
             data_wire_channel();
@@ -121,13 +120,13 @@ module right_switch_wire_channels() {
 module extra_material_removal() {
     // TODO: This should be defined in terms of the USB cable channel Y dimension.
     move([0, -cavity_y / 2, floor_thickness]) {
-        cuboid([platform_x / 2 - 3 * wall_thickness, cavity_y / 3, cavity_z], align=V_TOP + V_RIGHT + V_BACK);
+        cuboid([platform_x / 2 - 3 * wall_thickness, cavity_y / 2.5, cavity_z], align=V_TOP + V_RIGHT + V_BACK);
     }
 }
 
 module platform_lid_screw() {
     nut_shaft_height = platform_z / 2;
-    move([lid_screw_xpos, lid_screw_ypos, -.001]) {
+    move([lid_screw_xpos, 0, -.001]) {
         cyl(d=lid_nut_diameter, h=nut_shaft_height, align=V_TOP, $fn=6);
         zmove(nut_shaft_height-.001) {
             cyl(d=lid_screw_shaft_diameter, h=platform_z, align=V_TOP);
@@ -170,7 +169,7 @@ module phone_clamp_screw_hole() {
 module lid_screw() {
     screw_head_height_adjustment = 30;
 
-    move([lid_screw_xpos, lid_screw_ypos, lid_z +.001]) {
+    move([lid_screw_xpos, 0, lid_z +.001]) {
         zmove(screw_head_height_adjustment) {
             cyl(
                 d=lid_screw_head_diameter,
@@ -187,4 +186,4 @@ module lid_screw() {
 
 
 platform();
-ymove(50) lid();
+ymove(65) lid();

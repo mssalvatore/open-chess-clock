@@ -18,17 +18,17 @@ controller_insert_depth = 2.6;
 controller_top_clearance = 5;
 controller_bottom_clearance = 7.5;
 
-controller_mount_long_side_x = controller_y + controller_wall_thickness;
+controller_mount_long_side_x = controller_y;
 controller_mount_long_side_y = controller_wall_thickness + controller_insert_depth;
 controller_mount_long_side_z = controller_bottom_clearance + controller_z + controller_top_clearance;
 
-controller_short_side_x = controller_mount_long_side_y;
-controller_short_side_y = (2 * controller_wall_thickness) + controller_x;
-controller_short_side_z = controller_mount_long_side_z;
+controller_mount_short_side_x = controller_mount_long_side_y;
+controller_mount_short_side_y = controller_x;
+controller_mount_short_side_z = controller_mount_long_side_z;
 
 
-cavity_x = controller_mount_long_side_x + controller_short_side_x - controller_insert_depth;
-cavity_y = 42;
+cavity_x = controller_mount_long_side_x + controller_mount_short_side_x - controller_insert_depth + 5;
+cavity_y = 48;
 cavity_z = controller_mount_long_side_z;
 
 cable_channel_dimension = cavity_z;
