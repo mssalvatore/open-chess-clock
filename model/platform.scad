@@ -18,6 +18,7 @@ wall_thickness = 2;
 lid_x = platform_x - wall_thickness - lid_lip;
 lid_y = platform_y- wall_thickness - lid_lip;
 lid_z = platform_z - (cavity_z) + .002;
+lid_tolerance = 0.1;
 
 switch_theta = 45;
 phone_theta = 22.5;
@@ -92,7 +93,11 @@ module lid_cutout() {
     zpos = platform_z - lid_z + .001;
 
     zmove(zpos) {
-        cuboid([lid_x, lid_y, lid_z], fillet=fillet, edges=EDGES_Z_ALL, align=V_TOP);
+        cuboid(
+            [lid_x + lid_tolerance, lid_y + lid_tolerance, lid_z],
+            fillet=fillet,
+            edges=EDGES_Z_ALL, align=V_TOP
+        );
     }
 }
 
