@@ -21,8 +21,6 @@ switch_socket_hole_y_pos = -(switch_platform_y - switch_border);
 wire_channel_center_adjustment = 4 * mx_schematic_unit;
 wire_channel_length = switch_platform_y - 17;
 
-fillet = 4;
-
 module switch_platform() {
     difference() {
         union() {

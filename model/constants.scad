@@ -1,5 +1,7 @@
 include <hotswap_pcb_generator/scad/parameters.scad>
 
+fillet = 5;
+
 socket_dimension = socket_size + (h_border_width * 2);
 switch_platform_z = 9;
 switch_border = 3;
