@@ -6,7 +6,7 @@ socket_dimension = socket_size + (h_border_width * 2);
 switch_platform_z = 9;
 switch_border = 3;
 switch_platform_x = socket_dimension + 2 * switch_border;
-switch_platform_y = socket_dimension + switch_border + 30;
+switch_platform_y = socket_dimension + switch_border + 40;
 switch_z_offset = pcb_thickness / 2;
 
 controller_x = 18;
