@@ -14,7 +14,7 @@ platform_y = cavity_y + 2 * cavity_border; // TODO: Fix magic number
 platform_z = cavity_z + 2 * floor_thickness; // TODO: Fix magic number
 
 lid_lip = 1;
-wall_thickness = 2;
+wall_thickness = 2.5;
 lid_x = platform_x - wall_thickness - lid_lip;
 lid_y = platform_y- wall_thickness - lid_lip;
 lid_z = platform_z - (cavity_z) + .002;
