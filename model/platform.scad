@@ -7,17 +7,17 @@ use <controller.scad>
 use <switches.scad>
 
 cavity_border = 3;
-floor_thickness = 2.5;
+lid_z = 2.6;
+floor_thickness = 3;
 usb_cable_connector_length = 40;
 platform_x = cavity_x + usb_cable_connector_length - 3;
 platform_y = cavity_y + 2 * cavity_border; // TODO: Fix magic number
-platform_z = cavity_z + 2 * floor_thickness; // TODO: Fix magic number
+platform_z = cavity_z + floor_thickness + lid_z; // TODO: Fix magic number
 
 lid_lip = 1;
 wall_thickness = 2.5;
 lid_x = platform_x - wall_thickness - lid_lip;
 lid_y = platform_y- wall_thickness - lid_lip;
-lid_z = platform_z - (cavity_z) + .002;
 lid_tolerance = 0.2;
 
 switch_theta = 45;
@@ -28,10 +28,12 @@ phone_clamp_depth = 21;
 phone_clamp_screw_shaft_diameter = 7;
 phone_clamp_screw_head_diameter = 12;
 phone_clamp_screw_head_height =  5;
+phone_clamp_screw_hole_ypos = -cos(phone_theta) * lid_z;
+phone_clamp_screw_hole_zpos = -phone_clamp_screw_head_height * 1.5 - 4.5;  // TODO: Magic number
 
 lid_screw_shaft_diameter = 5;
 lid_screw_head_diameter = 10;
-lid_screw_head_height = 2.75;
+lid_screw_head_height = 1.6;
 lid_nut_diameter = 10.4;
 lid_screw_xpos = phone_clamp_depth / 2 + lid_screw_head_diameter / 2 + 1;
 
@@ -55,7 +57,7 @@ module platform() {
                 }
             }
 
-            xmove(-controller_xpos) controller_mount();
+            zmove(floor_thickness) xmove(-controller_xpos) controller_mount();
         }
         lid_cutout();
         wire_bends();
@@ -89,11 +91,11 @@ module wire_channels(switch_xpos, switch_ypos) {
 }
 
 module lid_cutout() {
-    zpos = platform_z - lid_z + .001;
+    zpos = platform_z - lid_z - .001;
 
     zmove(zpos) {
         cuboid(
-            [lid_x + lid_tolerance, lid_y + lid_tolerance, lid_z],
+            [lid_x + lid_tolerance, lid_y + lid_tolerance, lid_z + .002],
             fillet=fillet,
             edges=EDGES_Z_ALL, align=V_TOP
         );
@@ -152,18 +154,20 @@ module lid() {
 }
 
 module phone_clamp_screw_hole() {
-    xrot(-phone_theta * 1) {
-        ymove(- cos(phone_theta) * lid_z) {
-            // TODO: Magic number
-            zmove(-phone_clamp_screw_head_height * 1.5 - 4.5) {
-                cyl(d=phone_clamp_screw_head_diameter, h=phone_clamp_screw_head_height * 3, align=V_TOP);
+    xrot(-phone_theta) {
+        ymove(phone_clamp_screw_hole_ypos) {
+            zmove(phone_clamp_screw_hole_zpos) {
+                cyl(
+                    d=phone_clamp_screw_head_diameter,
+                    h=phone_clamp_screw_head_height * 3,
+                    align=V_TOP
+                );
             }
             zmove(-.001){
                 cyl(d=phone_clamp_screw_shaft_diameter, h=20, align=V_TOP);
             }
         }
     }
-
 }
 
 module lid_screw() {
