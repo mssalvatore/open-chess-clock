@@ -18,7 +18,7 @@ wall_thickness = 2;
 lid_x = platform_x - wall_thickness - lid_lip;
 lid_y = platform_y- wall_thickness - lid_lip;
 lid_z = platform_z - (cavity_z) + .002;
-lid_tolerance = 0.1;
+lid_tolerance = 0.2;
 
 switch_theta = 45;
 phone_theta = 22.5;
