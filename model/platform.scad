@@ -6,7 +6,7 @@ include <constants.scad>
 use <controller.scad>
 use <switches.scad>
 
-cavity_border = 1.5;
+cavity_border = 3;
 lid_z = 2.6;
 floor_thickness = 3;
 platform_x = cavity_x + usb_cable_connector_length + 7;
@@ -120,8 +120,8 @@ module right_switch_wire_channels() {
 
 module extra_material_removal() {
     // TODO: This should be defined in terms of the USB cable channel Y dimension.
-    move([0, -cavity_y / 2, floor_thickness]) {
-        cuboid([platform_x / 2 - 3 * wall_thickness, cavity_y / 2.5, cavity_z], align=V_TOP + V_RIGHT + V_BACK);
+    move([-1, -cavity_y / 2, floor_thickness]) {
+        cuboid([platform_x / 1.8 - 3 * wall_thickness, cavity_y / 2.5, cavity_z], align=V_TOP + V_RIGHT + V_BACK);
     }
 }
 
