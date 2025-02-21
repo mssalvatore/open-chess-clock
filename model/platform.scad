@@ -7,7 +7,7 @@ use <controller.scad>
 use <switches.scad>
 
 cavity_border = 3;
-lid_z = 2.6;
+lid_z = 2.65;
 floor_thickness = 3;
 platform_x = cavity_x + usb_cable_connector_length + 7;
 platform_y = cavity_y + 2 * cavity_border; // TODO: Fix magic number
@@ -90,11 +90,11 @@ module wire_channels(switch_xpos, switch_ypos) {
 }
 
 module lid_cutout() {
-    zpos = platform_z - lid_z - .001;
+    zpos = platform_z - lid_z - .003;
 
     zmove(zpos) {
         cuboid(
-            [lid_x + lid_tolerance, lid_y + lid_tolerance, lid_z + .002],
+            [lid_x + lid_tolerance, lid_y + lid_tolerance, lid_z + .004],
             fillet=fillet,
             edges=EDGES_Z_ALL, align=V_TOP
         );

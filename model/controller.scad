@@ -73,7 +73,7 @@ module controller_cavity() {
     cable_channel_ypos = -(controller_mount_long_side_y - controller_insert_depth + (controller_x / 2) - cable_channel_dimension / 2);
 
     ymove(cavity_y / 2) {
-        cuboid([cavity_x, cavity_y, cavity_z], align=V_TOP + V_FRONT);
+        cuboid([cavity_x, cavity_y, cavity_z], fillet=fillet, edges=EDGES_Z_LF, align=V_TOP + V_FRONT);
         move([cable_channel_xpos, cable_channel_ypos, 0]) {
             cuboid(
                 [50, cable_channel_dimension, cable_channel_dimension],
