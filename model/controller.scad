@@ -4,15 +4,20 @@ use <BOSL/transforms.scad>
 
 include <constants.scad>
 
+slot_zpos = controller_bottom_clearance - (controller_z / 2);
 
 module controller_mount() {
-    controller_total_x = controller_mount_short_side_x + controller_mount_long_side_x - controller_insert_depth;
+    controller_total_x = controller_mount_short_side_x + controller_mount_long_side_x;
     xpos = (controller_mount_short_side_x - controller_insert_depth) / 2 - (cavity_x - controller_total_x) / 2;
     ypos = -controller_mount_long_side_y + cavity_y / 2;
 
     move([xpos, ypos, 0]){
-        controller_mount_long_side();
-        controller_mount_short_side();
+        difference() {
+            union() {
+                controller_mount_long_side();
+                controller_mount_short_side();
+            }
+        }
     }
 }
 
@@ -21,7 +26,6 @@ module controller_mount_long_side() {
 
     slot_xpos = -(controller_mount_long_side_x - controller_y) / 2 + .001;
     slop_ypos = -.001;
-    slot_zpos = controller_bottom_clearance - (controller_z / 2);
 
     difference() {
         cuboid(
@@ -33,7 +37,7 @@ module controller_mount_long_side() {
             align=alignment
         );
         move([slot_xpos, -.001, slot_zpos]) {
-            cuboid([controller_y, controller_insert_depth, controller_z], align=alignment);
+            cuboid([controller_y + 1, controller_insert_depth, controller_z], align=alignment);
         }
     }
 }
@@ -43,9 +47,8 @@ module controller_mount_short_side() {
 
     slot_xpos = .001;
     slot_ypos = -.001;
-    slot_zpos = controller_bottom_clearance - (controller_z / 2);
 
-    xpos = -(controller_mount_long_side_x / 2 - controller_insert_depth - .001);
+    xpos = -(controller_mount_long_side_x / 2 - controller_insert_depth / 2 - .001);
     ypos = controller_mount_long_side_y;
 
     move([xpos, ypos, 0]) {
@@ -83,6 +86,10 @@ module controller_cavity() {
     }
 }
 
+*intersection() {
+    controller_mount();
+    #cuboid([controller_mount_long_side_x, controller_mount_short_side_y + 10, 20], align=V_BACK + V_TOP + V_LEFT);
+}
 controller_mount();
 
-#controller_cavity();
+*controller_cavity();
