@@ -11,7 +11,7 @@ switch_z_offset = pcb_thickness / 2;
 
 controller_x = 18;
 controller_y = 36.2;
-controller_z = 1.55;
+controller_z = 2;
 controller_wall_thickness = 1.75;
 controller_insert_depth = 2.6;
 
@@ -35,6 +35,8 @@ cable_channel_dimension = cavity_z;
 
 wire_slot_x = cavity_x / 2;
 wire_slot_y = wire_slot_x / 2;
+
+usb_cable_connector_length = 40;
 
 
 // -------------------------------------------------------------------------------------------------

@@ -6,11 +6,10 @@ include <constants.scad>
 use <controller.scad>
 use <switches.scad>
 
-cavity_border = 3;
+cavity_border = 1.5;
 lid_z = 2.6;
 floor_thickness = 3;
-usb_cable_connector_length = 40;
-platform_x = cavity_x + usb_cable_connector_length - 3;
+platform_x = cavity_x + usb_cable_connector_length + 7;
 platform_y = cavity_y + 2 * cavity_border; // TODO: Fix magic number
 platform_z = cavity_z + floor_thickness + lid_z; // TODO: Fix magic number
 
