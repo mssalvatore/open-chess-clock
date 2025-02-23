@@ -51,7 +51,7 @@ module data_wire_channel() {
 
 module platform_wire_channel(xpos) {
     ypos = wire_channel_center_adjustment - (switch_platform_y / 2);
-    zpos = switch_z_offset;
+    zpos = wire_diameter * 1.1;
         move([xpos, ypos, zpos]) {
             zrot(90)wire_channel([0, 0], true, wire_channel_length);
         }
