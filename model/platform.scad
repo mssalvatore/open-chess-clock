@@ -6,17 +6,10 @@ include <constants.scad>
 use <controller.scad>
 use <switches.scad>
 
-cavity_border = 3;
-lid_z = 2.65;
-floor_thickness = 3;
-platform_x = cavity_x + usb_cable_connector_length + 7;
-platform_y = cavity_y + 2 * cavity_border; // TODO: Fix magic number
-platform_z = cavity_z + floor_thickness + lid_z; // TODO: Fix magic number
 
 lid_lip = 1;
-wall_thickness = 2.5;
-lid_x = platform_x - wall_thickness - lid_lip;
-lid_y = platform_y- wall_thickness - lid_lip;
+lid_x = platform_x - body_wall_thickness - lid_lip;
+lid_y = platform_y- body_wall_thickness - lid_lip;
 lid_tolerance = 0.2;
 
 switch_theta = 45;
@@ -121,7 +114,7 @@ module right_switch_wire_channels() {
 module extra_material_removal() {
     // TODO: This should be defined in terms of the USB cable channel Y dimension.
     move([-1, -cavity_y / 2, floor_thickness]) {
-        cuboid([platform_x / 1.8 - 3 * wall_thickness, cavity_y / 2.5, cavity_z], align=V_TOP + V_RIGHT + V_BACK);
+        cuboid([platform_x / 1.8 - 3 * body_wall_thickness, cavity_y / 2.5, cavity_z], align=V_TOP + V_RIGHT + V_BACK);
     }
 }
 
@@ -137,7 +130,7 @@ module platform_lid_screw() {
 
 module lid() {
     wedge_y = cos(phone_theta) * phone_clamp_width;
-    wedge_ypos = -((lid_y - wedge_y) / 2 - wall_thickness);
+    wedge_ypos = -((lid_y - wedge_y) / 2 - body_wall_thickness);
     difference() {
         union() {
             cuboid([lid_x, lid_y, lid_z], fillet=fillet, edges=EDGES_Z_ALL, align=V_TOP);

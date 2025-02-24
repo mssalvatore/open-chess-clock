@@ -2,6 +2,8 @@ include <hotswap_pcb_generator/scad/parameters.scad>
 
 fillet = 5;
 
+body_wall_thickness = 2.5;
+
 socket_dimension = socket_size + (h_border_width * 2);
 switch_platform_z = 9;
 switch_border = 3;
@@ -33,7 +35,29 @@ cavity_z = controller_mount_long_side_z;
 
 cable_channel_dimension = cavity_z;
 
+cable_channel_xpos = cavity_x / 2 - .001;
+cable_channel_ypos = -(controller_mount_long_side_y - controller_insert_depth + (controller_x / 2) - cable_channel_dimension / 2);
+
 wire_slot_x = cavity_x / 2;
 wire_slot_y = wire_slot_x / 2;
 
 usb_cable_connector_length = 40;
+
+strain_relief_x = cavity_z + .5;
+strain_relief_y = cavity_z + .5;
+strain_relief_z = 12;
+
+
+strain_relief_lip = 2;
+strain_relief_lip_z = 1;
+strain_relief_fillet = 2;
+
+cavity_border = 3;
+lid_z = 2.65;
+floor_thickness = 3;
+platform_x = cavity_x + usb_cable_connector_length + 7;
+platform_y = cavity_y + 2 * cavity_border; // TODO: Fix magic number
+platform_z = cavity_z + floor_thickness + lid_z; // TODO: Fix magic number
+
+// TODO: Fix magic number
+cable_channel_length = platform_x - cavity_x - 2 * cavity_border + body_wall_thickness + .502;

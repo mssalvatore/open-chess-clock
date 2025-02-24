@@ -69,20 +69,42 @@ module controller_mount_short_side() {
 }
 
 module controller_cavity() {
-    cable_channel_xpos = cavity_x / 2 - .001;
-    cable_channel_ypos = -(controller_mount_long_side_y - controller_insert_depth + (controller_x / 2) - cable_channel_dimension / 2);
-
     ymove(cavity_y / 2) {
         cuboid([cavity_x, cavity_y, cavity_z], fillet=fillet, edges=EDGES_Z_LF, align=V_TOP + V_FRONT);
         move([cable_channel_xpos, cable_channel_ypos, 0]) {
             cuboid(
-                [50, cable_channel_dimension, cable_channel_dimension],
+                [cable_channel_length, cable_channel_dimension, cable_channel_dimension],
                 align=V_TOP + V_FRONT + V_RIGHT
             );
         }
         move([0, -cavity_y, 0.001]) {
             cuboid([wire_slot_x, wire_slot_y, 5], align=V_BOTTOM + V_BACK);
         }
+        strain_relief_recess();
+    }
+}
+
+module strain_relief_recess() {
+    tolerance = 0.35;
+    cutout_x = strain_relief_lip_z + tolerance;
+    cutout_y = cavity_z + strain_relief_lip + 2 * tolerance;
+    cutout_z = cavity_z + strain_relief_lip + 2 * tolerance;
+
+    xpos = cavity_x / 2  + cable_channel_length - cutout_x + .001;
+    ypos = cable_channel_ypos + (strain_relief_lip / 2 + tolerance);
+    zpos = -(strain_relief_lip / 2 + tolerance);
+
+    move([xpos, ypos, zpos]) {
+        cuboid(
+            [
+                cutout_x,
+                cutout_y,
+                cutout_z
+            ],
+            fillet = strain_relief_fillet + tolerance,
+            edges=EDGES_X_ALL,
+            align=V_TOP + V_FRONT + V_RIGHT
+        );
     }
 }
 
