@@ -13,9 +13,9 @@ create a chess clock that
 
 The first version of this clock is powered by [Chess.com's Android chess clock
 app](https://github.com/ChessCom/android-chessclock), which is licensed under
-MPL-2.0. This app will likely be replaced in version 2 in order to allow
-pairing two devices in order to play 4-player games and chess variants with
-time controls.
+MPL-2.0. This app will likely be replaced in version 2 so that two devices may
+be paired in order to play 4-player games and chess variants with time
+controls.
 
 
 ## Feature status
@@ -62,7 +62,6 @@ time controls.
 | Arduino Pro Micro-compatible microcontroller (USB-C) | 1 |
 | Cherry MX-compatible keycap | 2 |
 | Cherry MX-compatible switch | 2 |
-| Cherry-compatible heavy-spring (optional) | 2 |
 
 ## Build instructions
 
@@ -289,4 +288,5 @@ Thanks to [pixel2](https://www.printables.com/@pixel2_237985) for the
 [3D-printed phone
 clamp](https://www.printables.com/model/233032-phone-clamp-for-tripod/files).
 
-Thanks to [Chess.com] for the Android chess clock app.
+Thanks to [Chess.com](https://chess.com) for the [Android chess clock
+app](https://play.google.com/store/apps/details?id=com.chess.clock&hl=en_US).
