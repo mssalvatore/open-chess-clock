@@ -52,7 +52,7 @@ controls.
 | 1/4-20 nut | 3 |
 | 2.54mm right-angle male header pins | 4 |
 | 2.54mm 18-24 AWG female crimp connector | 4 |
-| 4-pin dupont connector housing | 1 |
+| 4-pin DuPont connector housing | 1 |
 | 6" USB-C to USB-C cable| 1 |
 | #8-32 x 1/2" truss head machine screw | 1 |
 | #8-32 nut | 1 |
@@ -106,6 +106,8 @@ Remove the supports from the clock base and lid. Pay special attention to the
 slot where the microcontroller will be mounted. If the supports are too
 difficult to remove, you may need to adjust your slicer settings.
 
+![Build step 2](./images/build-step-02.jpg)
+
 ### 3. Install the wiring
 
 #### 3a. Cut the wires to length
@@ -118,19 +120,25 @@ Cut the wires to the following lengths:
 - Red: 13cm
 
 #### 3b. Install the wires in the wiring channels
-Line each wire up with its corresponding slot and note where the switch pins
-protrude into the wiring channel. Shave a bit of the insulation from the side
-of the wire in order to expose the inner strands so that the switch pins can
-make good contact.
+
+Remove the supports in the wiring channels. Line each wire up with its
+corresponding slot and note where the switch pins protrude into the wiring
+channel. Shave a bit of the insulation from the side of the wire in order to
+expose the inner strands so that the switch pins can make good contact.
+
+![Build step 3b-1](./images/build-step-03b-1.jpg)
 
 Press each wire into its corresponding slot, lining up the switch pins with the
 exposed wire. Run the wires up into the base through the cutout in the bottom.
+![Build step 3b-2](./images/build-step-03b-2.jpg)
 
-#### 3c. Install the dupont connector
+#### 3c. Install the DuPont connector
 
 Crimp a 2.54mm 18-24 AWG female crimp connector onto the end of each wire. Plug
-the wires into a 4-pin dupont connector housing. The order of the wires from
+the wires into a 4-pin DuPont connector housing. The order of the wires from
 left to right is white, red, black, black.
+
+![Build step 3c](./images/build-step-03c.jpg)
 
 ### 4. Install the switches
 
@@ -139,12 +147,18 @@ electrical circuit tester, verify that the switches are making good contact
 with the wiring by testing for a closed circuit between the data and ground
 wires when each switch is pressed.
 
+![Build step 4-1](./images/build-step-04-1.jpg)
+
+![Build step 4-2](./images/build-step-04-2.jpg)
+
 ### 5. Install the microcontroller
 
 #### 5a. Solder the header pins
 
 Solder the right-angle header pins into the microcontroller's pin holes. Use
 the two ground pins, pin 2, and pin 3.
+
+![Build step 5a](./images/build-step-05a.jpg)
 
 #### 5b. Load the sketch
 
@@ -157,15 +171,25 @@ Slide the microcontroller into the slot in the clock base until it is firmly
 seated. The slot should be snug enough to retain the microcontroller, but the
 USB cable and strain relief insert will secure it in place.
 
+Attach the DuPont connector to the pins on the microcontroller.
+
+![Build step 5c](./images/build-step-05c.jpg)
+
 #### 5d. Install the USB cable
 
 Pass the USB cable and one side of the strain relief insert through the USB
 cable channel in the clock base. The hole in the strain relief insert is
-slightly off-center in the vertical direction and should align with the USB
+slightly off-center (low) in the vertical direction and should align with the USB
 port.
+
+![Build step 5d-1](./images/build-step-05d-1.jpg)
 
 Plug the cable into the microcontroller. Press the other side of the strain
 relief insert into place. It should fit snugly.
+
+![Build step 5d-2](./images/build-step-05d-2.jpg)
+
+![Build step 5d-3](./images/build-step-05d-3.jpg)
 
 Now is a good time to test the clock by plugging the USB cable into the Android
 device and opening the Chess.com chess clock app. If the buttons do not
@@ -194,11 +218,19 @@ handle.
 Using a 1/4-20 x 1/2" round/truss head machine screw, attach the phone clamp to
 the clock lid.
 
+![Build step 7a-1](./images/build-step-07a-1.jpg)
+
+![Build step 7a-2](./images/build-step-07a-2.jpg)
+
 #### 7b. Attach the lid to the base.
 
 Put the lid onto the base, aligning the screw holes. Place a #8-32 nut into
 shaft in the clock base. Thread the #8-32 x 1/2" truss head machine screw
 through the hole in the clock lid and into the nut in the clock base.
+
+![Build step 7b-1](./images/build-step-07b-1.jpg)
+
+![Build step 7b-2](./images/build-step-07b-2.jpg)
 
 ### 8. Install the phone
 
@@ -214,6 +246,8 @@ Place the phone into the phone clamp and tighten gently until the phone is
 secure. Plug the USB cable into the phone. Open the Chess Clock app and test.
 If the buttons do not control the clock, please see the
 [troubleshooting](#Troubleshooting) section.
+
+![Build step 8b](./images/build-step-08b.jpg)
 
 ### 9. Install anti-slip material
 
