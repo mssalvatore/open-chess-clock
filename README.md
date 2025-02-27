@@ -1,5 +1,8 @@
 # Open Chess Clock
 
+![Open Chess Clock](./images/cover.jpg)
+
+## Summary
 Open Chess Clock is a completely open-source chess/game clock consisting of
 both off-the-shelf and 3D-printed parts. The goals of this project are to
 create a chess clock that
