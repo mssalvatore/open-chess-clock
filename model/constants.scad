@@ -61,3 +61,19 @@ platform_z = cavity_z + floor_thickness + lid_z; // TODO: Fix magic number
 
 // TODO: Fix magic number
 cable_channel_length = platform_x - cavity_x - 2 * cavity_border + body_wall_thickness + .502;
+
+phone_theta = 22.5;
+
+phone_clamp_width = 31;
+phone_clamp_depth = 21.1;
+phone_clamp_screw_shaft_diameter = 7;
+phone_clamp_screw_head_diameter = 12;
+phone_clamp_screw_head_height =  5;
+phone_clamp_screw_hole_ypos = -cos(phone_theta) * lid_z;
+phone_clamp_screw_gap = 4.8;
+
+lid_screw_shaft_diameter = 5;
+lid_screw_head_diameter = 10;
+lid_screw_head_height = 1.6;
+lid_nut_diameter = 10.4;
+lid_screw_xpos = phone_clamp_depth / 2 + lid_screw_head_diameter / 2 + 1;
