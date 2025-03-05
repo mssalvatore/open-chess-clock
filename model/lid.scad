@@ -34,24 +34,32 @@ module lid() {
     difference() {
         union() {
             cuboid([lid_x, lid_y, lid_z], fillet=fillet, edges=EDGES_Z_ALL, align=V_TOP);
-            move([0, wedge_ypos, lid_z - .001]) {
-                zrot(90) {
-                    right_triangle([wedge_y, phone_clamp_depth, wedge_z], align=V_TOP + V_CENTER);
-                    zmove(wedge_wall_height) {
-                        yspread(phone_clamp_depth + wedge_wall_thickness - .002, n=2) {
-                            zmove(-.001) {
-                                right_triangle([wedge_y,  wedge_wall_thickness, wedge_z], align=V_TOP + V_CENTER);
-                            }
-                            cuboid([wedge_y, wedge_wall_thickness, wedge_wall_height], align=V_BOTTOM + V_CENTER);
-                        }
-                    }
-                }
-            }
+            wedge();
         }
         ymove(wedge_ypos) {
             phone_clamp_screw_channel();
         }
         lid_screw();
+    }
+}
+
+module wedge() {
+    move([0, wedge_ypos, lid_z - .001]) {
+        zrot(90) {
+            right_triangle([wedge_y, phone_clamp_depth, wedge_z], align=V_TOP + V_CENTER);
+            zmove(wedge_wall_height) {
+                wedge_walls();
+            }
+        }
+    }
+}
+
+module wedge_walls() {
+    yspread(phone_clamp_depth + wedge_wall_thickness - .002, n=2) {
+        zmove(-.001) {
+            right_triangle([wedge_y,  wedge_wall_thickness, wedge_z], align=V_TOP + V_CENTER);
+        }
+        cuboid( [wedge_y, wedge_wall_thickness, wedge_wall_height], align=V_BOTTOM + V_CENTER);
     }
 }
 
@@ -109,6 +117,7 @@ module lid_screw() {
 
     }
 }
+
 lid();
 
 *intersection() {
