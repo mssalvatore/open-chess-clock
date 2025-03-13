@@ -65,12 +65,12 @@ cable_channel_length = platform_x - cavity_x - 2 * cavity_border + body_wall_thi
 phone_theta = 22.5;
 
 phone_clamp_width = 31;
-phone_clamp_depth = 21.1;
+phone_clamp_depth = 20.95;
 phone_clamp_screw_shaft_diameter = 7;
 phone_clamp_screw_head_diameter = 12;
 phone_clamp_screw_head_height =  5;
 phone_clamp_screw_hole_ypos = -cos(phone_theta) * lid_z;
-phone_clamp_screw_gap = 4.8;
+phone_clamp_screw_gap = 4.35;
 
 lid_screw_shaft_diameter = 5;
 lid_screw_head_diameter = 10;
